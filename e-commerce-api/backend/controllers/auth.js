@@ -3,7 +3,6 @@ const { StatusCodes } = require("http-status-codes");
 const {
   BadRequestError,
   UnauthenticatedError,
-  NotFoundError,
 } = require("../errors");
 const { attachCookiesResponse } = require("../utils/jwt");
 const createHash = require("../utils/createHash");
@@ -54,9 +53,7 @@ const login = async (req, res) => {
     res.status(StatusCodes.OK).json({ user: tokenUser });
     return;
   }
-
   refreshToken = crypto.randomBytes(40).toString("hex");
-
   const userAgent = req.headers["user-agent"];
   const ip = req.ip;
   const userToken = { refreshToken, ip, userAgent, userId: user._id };

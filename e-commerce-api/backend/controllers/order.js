@@ -1,10 +1,8 @@
 const Order = require("../models/Order");
 const Product = require("../models/Product");
 const { StatusCodes } = require("http-status-codes");
-// const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 const {
   BadRequestError,
-  UnauthenticatedError,
   NotFoundError,
 } = require("../errors");
 const { checkPermission } = require("../utils/checkPermission");
