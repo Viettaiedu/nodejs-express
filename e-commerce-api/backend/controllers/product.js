@@ -80,11 +80,11 @@ const getAllProducts = async (req, res) => {
   const skip = (page - 1) * limit;
   results = results.skip(skip).limit(limit);
   redisKey += ",page:" + page + "," + "limit:" + limit;
-  const valuesCached = await redis.get(redisKey);
-  if (valuesCached) {
-    const data = JSON.parse(valuesCached);
-    return res.status(200).json({ ...data, source: "cache" });
-  }
+  // const valuesCached = await redis.get(redisKey);
+  // if (valuesCached) {
+  //   const data = JSON.parse(valuesCached);
+  //   return res.status(200).json({ ...data, source: "cache" });
+  // }
   const totalsProducts = await Product.countDocuments();
   const products = await results;
   redis.set(
