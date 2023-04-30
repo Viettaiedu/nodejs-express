@@ -2,12 +2,12 @@ const Product = require("../models/Product");
 const { StatusCodes } = require("http-status-codes");
 const { BadRequestError, NotFoundError } = require("../errors");
 const path = require("path");
-const Redis = require("ioredis");
+// const Redis = require("ioredis");
 
-const redis = new Redis({
-  port: 6379, // Redis port
-  host: "127.0.0.1", // Redis host
-});
+// const redis = new Redis({
+//   port: 6379, // Redis port
+//   host: "127.0.0.1", // Redis host
+// });
 const getAllProducts = async (req, res) => {
   const {
     name,
@@ -87,18 +87,18 @@ const getAllProducts = async (req, res) => {
   // }
   const totalsProducts = await Product.countDocuments();
   const products = await results;
-  redis.set(
-    redisKey,
-    JSON.stringify({
-      currentPage: page,
-      totalPages: Math.ceil(totalsProducts / limit),
-      products,
-      nbHits: products.length,
-      totalProducts: totalsProducts,
-    }),
-    "EX",
-    60 * 60 * 60
-  );
+  // redis.set(
+  //   redisKey,
+  //   JSON.stringify({
+  //     currentPage: page,
+  //     totalPages: Math.ceil(totalsProducts / limit),
+  //     products,
+  //     nbHits: products.length,
+  //     totalProducts: totalsProducts,
+  //   }),
+  //   "EX",
+  //   60 * 60 * 60
+  // );
   res.status(StatusCodes.OK).json({
     currentPage: page,
     totalPages: Math.ceil(totalsProducts / limit),
